@@ -1,6 +1,6 @@
-row1 = ['', '', '']
-row2 = ['', '', '']
-row3 = ['', '', '']
+row1 = [' ', ' ', ' ']
+row2 = [' ', ' ', ' ']
+row3 = [' ', ' ', ' ']
 
 board = [row1, row2, row3]
 
@@ -9,11 +9,22 @@ color = {"blue": "\033[94m", "pink": "\033[90m", "red": "\033[91m", "end": "\033
 def reset_board():
     for index,x in enumerate(board):
         for innerIndex,y in enumerate(x):
-            board[index][innerIndex] = ''
+            board[index][innerIndex] = ' '
 
 def display_board(rows): 
-    for row in rows:
-        print(row)
+    print('-------------')
+    print('|   |   |   |')
+    print('| ' + board[0][0] + ' | ' + board[0][1] + ' | ' + board[0][2] + ' | ')
+    print('|   |   |   |')
+    print('-------------')
+    print('|   |   |   |')
+    print('| ' + board[1][0] + ' | ' + board[1][1] + ' | ' + board[1][2] + ' | ')
+    print('|   |   |   |')
+    print('-------------')
+    print('|   |   |   |')
+    print('| ' + board[2][0] + ' | ' + board[2][1] + ' | ' + board[2][2] + ' | ')
+    print('|   |   |   |')
+    print('-------------')
 
 def get_position(arg):
     position = "WRONG"
@@ -33,7 +44,7 @@ def get_position(arg):
                 within_range = False
             else:
                 within_range = True
-                if arg == "row" and '' not in board[int(position) - 1]:
+                if arg == "row" and ' ' not in board[int(position) - 1]:
                     print(f"{color['red']}No empty field in the selected {arg}. Try again.. {color['end']}")
                     empty_row = False
                 else:
@@ -63,13 +74,13 @@ def check_for_win(symbol):
 def validate_selection(row, index):
     invalid_index = False
 
-    if board[row - 1][index - 1] != '':
+    if board[row - 1][index - 1] != ' ':
         invalid_index = True
 
     while invalid_index == True:
         print(f"{color['red']}You can't choose this position. Try different position. {color['end']}")
         index = get_position("position")
-        if board[row - 1][index - 1] != '':
+        if board[row - 1][index - 1] != ' ':
             invalid_index = True
         else:
             invalid_index = False
@@ -79,7 +90,7 @@ def verify_move(player, symbol):
     if check_for_win(symbol) == True:
         print(f"{color['pink']}{player[symbol]} won the game!!! {color['end']}")
         return True
-    elif ('' not in row1) and ('' not in row2) and ('' not in row3) :
+    elif (' ' not in row1) and (' ' not in row2) and (' ' not in row3) :
         print(f"{color['pink']}Match ended in Draw!!! {color['end']}")            
         return True
     else:
